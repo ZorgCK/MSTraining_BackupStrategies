@@ -7,8 +7,6 @@ import software.amazon.awssdk.services.s3.S3Client;
 
 public class S3Utils
 {
-	private static String bucketname = "ms-training-backup-example";
-	
 	public static S3Client getS3Client()
 	{
 		System.setProperty("aws.accessKeyId", "");
