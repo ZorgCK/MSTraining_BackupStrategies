@@ -1,10 +1,5 @@
 package one.microstream;
 
-import java.net.URL;
-import java.util.Optional;
-
-import io.micronaut.core.io.ResourceResolver;
-import io.micronaut.core.io.scan.ClassPathResourceLoader;
 import one.microstream.afs.aws.s3.types.S3Connector;
 import one.microstream.afs.blobstore.types.BlobStoreFileSystem;
 import one.microstream.afs.nio.types.NioFileSystem;
@@ -24,21 +19,18 @@ public class DB
 	
 	static
 	{
-		ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
-		Optional<URL> resource = loader.getResource("microstream.xml");
-		
+		NioFileSystem storageFileSystem = NioFileSystem.New();
 		BlobStoreFileSystem backupS3Filesystem = BlobStoreFileSystem.New(
 			S3Connector.Caching(S3Utils.getS3Client()));
 		
 		// @formatter:off
 		
-		NioFileSystem          fileSystem     = NioFileSystem.New();
 		storageManager = EmbeddedStorageFoundation.New()
 			.setConfiguration(
 				StorageConfiguration.Builder()
 					.setStorageFileProvider(
-						Storage.FileProviderBuilder(fileSystem)
-							.setDirectory(fileSystem.ensureDirectoryPath("foundationStorage"))
+						Storage.FileProviderBuilder(storageFileSystem)
+							.setDirectory(storageFileSystem.ensureDirectoryPath("foundationStorage"))
 							.createFileProvider()
 					)
 					.setBackupSetup(

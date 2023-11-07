@@ -1,5 +1,0 @@
-<properties>
-	<property name="storage-directory" value="data" />
-	<property name="channel-count" value="4" />
-	<property name="backup-directory" value="data/backup" />
-</properties>
