@@ -91,6 +91,11 @@
 			<artifactId>microstream-storage-embedded-configuration</artifactId>
 			<version>08.01.01-MS-GA</version>
 		</dependency>
+		<dependency>
+			<groupId>one.microstream</groupId>
+			<artifactId>microstream-afs-aws-s3</artifactId>
+			<version>08.01.01-MS-GA</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -105,7 +110,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<!-- Uncomment to enable incremental compilation -->
-					<!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
+					<!--
+					<useIncrementalCompilation>false</useIncrementalCompilation> -->
 
 					<annotationProcessorPaths
 						combine.children="append">
@@ -117,7 +123,8 @@
 					</annotationProcessorPaths>
 					<compilerArgs>
 						<arg>-Amicronaut.processing.group=one.microstream</arg>
-						<arg>-Amicronaut.processing.module=MSTraining_BackupStrategies</arg>
+						<arg>
+							-Amicronaut.processing.module=MSTraining_BackupStrategies</arg>
 					</compilerArgs>
 				</configuration>
 			</plugin>
