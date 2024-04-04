@@ -1,14 +1,14 @@
 package one.microstream;
 
-import one.microstream.afs.aws.s3.types.S3Connector;
-import one.microstream.afs.blobstore.types.BlobStoreFileSystem;
-import one.microstream.afs.nio.types.NioFileSystem;
-import one.microstream.storage.embedded.types.EmbeddedStorageFoundation;
-import one.microstream.storage.embedded.types.EmbeddedStorageManager;
-import one.microstream.storage.types.Storage;
-import one.microstream.storage.types.StorageBackupSetup;
-import one.microstream.storage.types.StorageChannelCountProvider;
-import one.microstream.storage.types.StorageConfiguration;
+import org.eclipse.store.afs.aws.s3.types.S3Connector;
+import org.eclipse.store.afs.blobstore.types.BlobStoreFileSystem;
+import org.eclipse.store.afs.nio.types.NioFileSystem;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorageFoundation;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorageManager;
+import org.eclipse.store.storage.types.Storage;
+import org.eclipse.store.storage.types.StorageBackupSetup;
+import org.eclipse.store.storage.types.StorageChannelCountProvider;
+import org.eclipse.store.storage.types.StorageConfiguration;
 
 
 public class DB
