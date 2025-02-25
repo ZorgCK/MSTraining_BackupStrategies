@@ -8,21 +8,28 @@ import org.eclipse.store.storage.embedded.types.EmbeddedStorageManager;
 
 import io.micronaut.core.io.ResourceResolver;
 import io.micronaut.core.io.scan.ClassPathResourceLoader;
+import jakarta.inject.Singleton;
 
 
+@Singleton
 public class DB
 {
-	public static EmbeddedStorageManager	storageManager;
-	public final static DataRoot			root	= new DataRoot();
+	public EmbeddedStorageManager	storageManager;
+	public final DataRoot			root	= new DataRoot();
 	
-	static
+	public EmbeddedStorageManager getStorageManager()
 	{
-		ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
-		Optional<URL> resource = loader.getResource("microstream.xml");
+		if(this.storageManager == null)
+		{
+			ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
+			Optional<URL> resource = loader.getResource("microstream.xml");
+			
+			// @formatter:off
+			storageManager = EmbeddedStorageConfiguration.load(resource.get().getPath())
+				.createEmbeddedStorageFoundation()
+				.createEmbeddedStorageManager(root).start();
+		}
 		
-		// @formatter:off
-		storageManager = EmbeddedStorageConfiguration.load(resource.get().getPath())
-			.createEmbeddedStorageFoundation()
-			.createEmbeddedStorageManager(root).start();
+		return this.storageManager;
 	}
 }

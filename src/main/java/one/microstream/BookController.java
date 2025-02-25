@@ -6,11 +6,16 @@ import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
-
+@Singleton
 @Controller("/books")
 public class BookController
 {
+	@Inject
+	public DB db;
+	
 	@Get("/create")
 	public HttpResponse<String> createBooks()
 	{
@@ -19,8 +24,8 @@ public class BookController
 		Book book3 = new Book("978-3-7341-0742-9", "Die Suche");
 		Book book4 = new Book("978-3-7341-0522-7", "Die Erscheinung");
 		
-		DB.root.getBooks().addAll(CollectionUtils.setOf(book, book2, book3, book4));
-		DB.storageManager.store(DB.root.getBooks());
+		db.root.getBooks().addAll(CollectionUtils.setOf(book, book2, book3, book4));
+		db.getStorageManager().store(db.root.getBooks());
 		
 		return HttpResponse.ok("Books successfully created!");
 	}
@@ -28,6 +33,6 @@ public class BookController
 	@Get
 	public List<Book> getBook()
 	{
-		return DB.root.getBooks();
+		return db.root.getBooks();
 	}
 }
