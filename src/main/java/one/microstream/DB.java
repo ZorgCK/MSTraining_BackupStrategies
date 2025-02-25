@@ -15,21 +15,16 @@ import jakarta.inject.Singleton;
 public class DB
 {
 	public EmbeddedStorageManager	storageManager;
-	public final DataRoot			root	= new DataRoot();
+	public DataRoot					root	= new DataRoot();
 	
-	public EmbeddedStorageManager getStorageManager()
+	public DB()
 	{
-		if(this.storageManager == null)
-		{
-			ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
-			Optional<URL> resource = loader.getResource("microstream.xml");
-			
-			// @formatter:off
-			storageManager = EmbeddedStorageConfiguration.load(resource.get().getPath())
-				.createEmbeddedStorageFoundation()
-				.createEmbeddedStorageManager(root).start();
-		}
+		ClassPathResourceLoader loader = new ResourceResolver().getLoader(ClassPathResourceLoader.class).get();
+		Optional<URL> resource = loader.getResource("microstream.xml");
 		
-		return this.storageManager;
+		// @formatter:off
+		storageManager = EmbeddedStorageConfiguration.load(resource.get().getPath())
+			.createEmbeddedStorageFoundation()
+			.createEmbeddedStorageManager(root).start();
 	}
 }

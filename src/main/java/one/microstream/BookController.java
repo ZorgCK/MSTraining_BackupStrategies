@@ -25,7 +25,7 @@ public class BookController
 		Book book4 = new Book("978-3-7341-0522-7", "Die Erscheinung");
 		
 		db.root.getBooks().addAll(CollectionUtils.setOf(book, book2, book3, book4));
-		db.getStorageManager().store(db.root.getBooks());
+		db.storageManager.store(db.root.getBooks());
 		
 		return HttpResponse.ok("Books successfully created!");
 	}
